@@ -25,10 +25,10 @@ contract StarNotary is ERC721 {
        
     // Create Star using the Struct
     function createStar(string memory _name, uint256 _tokenId) public { // Passing the name and tokenId as a parameters
-       createStar(_name, _tokenId, "DUMMY TEST"); 
+       createStarWithSymbol(_name, _tokenId, ""); 
     }
 
-    function createStar(string memory _name, uint256 _tokenId, string memory _symbol) public { // Passing the name and tokenId as a parameters
+    function createStarWithSymbol(string memory _name, uint256 _tokenId, string memory _symbol) public { // Passing the name and tokenId as a parameters
         Star memory newStar = Star(_name, _symbol); // Star is an struct so we are creating a new Star
         tokenIdToStarInfo[_tokenId] = newStar; // Creating in memory the Star -> tokenId mapping
         _mint(msg.sender, _tokenId); // _mint assign the the star with _tokenId to the sender address (ownership)
@@ -62,8 +62,8 @@ contract StarNotary is ERC721 {
     // Implement Task 1 lookUptokenIdToStarInfo
     // retrieves an existing star from the mapping
     function lookUptokenIdToStarInfo(uint256 _tokenId) public view returns (string memory) {
-        //require(tokenIdToStarInfo[_tokenId], "Star not found");
-        return tokenIdToStarInfo[_tokenId].name; 
+        Star memory star = tokenIdToStarInfo[_tokenId]; 
+        return star.name; 
     }
 
     // Implement Task 1 Exchange Stars function
@@ -73,7 +73,7 @@ contract StarNotary is ERC721 {
         //3. Get the owner of the two tokens (ownerOf(_tokenId1), ownerOf(_tokenId1)
         //4. Use _transferFrom function to exchange the tokens.
 
-        require((ownerOf(_tokenId1) == msg.sender) || (ownerOf(_tokenId2) == msg.sender), "You can't exchange a Star you don't own"); 
+        require(((ownerOf(_tokenId1) == msg.sender) || (ownerOf(_tokenId2) == msg.sender)), "You can't exchange a Star you don't own"); 
         address ownerAddress1 = ownerOf(_tokenId1);
         address ownerAddress2 = ownerOf(_tokenId2);
 
