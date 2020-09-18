@@ -14,5 +14,6 @@ openzeppelin-solidity ^2.5.1
 ```
 ERC-721 Token Name: RafaUniqueStar
 ERC-721 Token Symbol: RUS
+ERC-721 Token ID: 1978
 “Token Address” on the Rinkeby Network: 0x7099825bb722a5171eB95Bb7ad11ccd16F01eD87
 ```
